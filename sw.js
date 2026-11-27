@@ -1,5 +1,5 @@
-const CACHE='ghc-v7.1.8';
-const CORE=['./','./index.html','./data.js','./research-dossier.js','./local-corpus.js','./manifest.json','./icon192.png','./icon512.png','./logo-classico.svg'];
+const CACHE='ghc-v7.1.9';
+const CORE=['./','./index.html','./data.js','./research-dossier.js','./local-corpus.js','./analytical-index.js','./manifest.json','./icon192.png','./icon512.png','./logo-classico.svg'];
 self.addEventListener('install',e=>e.waitUntil((async()=>{const c=await caches.open(CACHE);await c.addAll(CORE.map(p=>new Request(new URL(p,self.registration.scope),{cache:'reload'})));await self.skipWaiting()})()));
 self.addEventListener('activate',e=>e.waitUntil((async()=>{await Promise.all((await caches.keys()).filter(k=>k.startsWith('ghc-')&&k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim()})()));
 self.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(e.request.method!=='GET'||u.origin!==location.origin||!u.href.startsWith(self.registration.scope))return;const nav=e.request.mode==='navigate';const core=CORE.some(p=>new URL(p,self.registration.scope).href===u.href);if(!nav&&!core)return;e.respondWith((async()=>{const c=await caches.open(CACHE);try{const r=await fetch(e.request,{cache:'no-cache'});if(r.ok){try{await c.put(nav?new URL('./index.html',self.registration.scope).href:e.request,r.clone())}catch(err){console.warn(err)}}return r}catch(err){return (await c.match(e.request))||(nav?await c.match(new URL('./index.html',self.registration.scope).href):undefined)||Response.error()}})())});
