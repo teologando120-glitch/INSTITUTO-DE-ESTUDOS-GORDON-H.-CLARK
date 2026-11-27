@@ -1,4 +1,4 @@
-const CACHE='ghc-v7.3.0';
+const CACHE='ghc-v7.4.0';
 const CORE=['./','./index.html','./data.js','./research-dossier.js','./local-corpus.js','./analytical-index.js','./manifest.json','./icon192.png','./icon512.png','./logo-classico.svg'];
 self.addEventListener('install',e=>e.waitUntil((async()=>{const c=await caches.open(CACHE);await c.addAll(CORE.map(p=>new Request(new URL(p,self.registration.scope),{cache:'reload'})));await self.skipWaiting()})()));
 self.addEventListener('activate',e=>e.waitUntil((async()=>{await Promise.all((await caches.keys()).filter(k=>k.startsWith('ghc-')&&k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim()})()));
