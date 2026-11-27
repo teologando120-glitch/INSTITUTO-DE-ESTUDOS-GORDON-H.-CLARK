@@ -1,0 +1,28 @@
+{
+  "name": "Instituto de Estudos Gordon H. Clark",
+  "short_name": "GHC",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f1e7",
+  "theme_color": "#102638",
+  "icons": [
+    {
+      "src": "icon192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "id": "./",
+  "description": "Vida, obras e filosofia de Gordon Haddon Clark",
+  "lang": "pt-BR",
+  "categories": [
+    "education",
+    "books"
+  ]
+}
